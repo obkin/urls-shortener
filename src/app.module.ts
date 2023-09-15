@@ -3,9 +3,15 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ShortUrlEntity } from './entities/short-url.entity';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), DatabaseModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forFeature([ShortUrlEntity]),
+    DatabaseModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
