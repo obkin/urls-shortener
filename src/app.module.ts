@@ -5,6 +5,7 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ShortUrlEntity } from './entities/short-url.entity';
+import { LoggerService } from './logger/logger.service';
 
 @Module({
   imports: [
@@ -13,6 +14,6 @@ import { ShortUrlEntity } from './entities/short-url.entity';
     DatabaseModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, LoggerService],
 })
 export class AppModule {}
