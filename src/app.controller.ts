@@ -20,7 +20,6 @@ export class AppController {
   getFullUrl(@Body() createUserUrl: UserUrlDto): void {
     try {
       this.appService.createShortUrl(createUserUrl);
-      // console.log(createUserUrl); // console.log
     } catch (e) {
       console.log('[AppService] - error: ', e.message);
     }

@@ -4,12 +4,14 @@ import { ShortUrlEntity } from './entities/short-url.entity';
 import { Repository } from 'typeorm';
 import { UserUrlDto } from './entities/user-url.dto';
 import { LoggerService } from './logger/logger.service';
+import { HashGenerator } from './helpers/hash-generator';
 
 @Injectable()
 export class AppService {
   constructor(
     @InjectRepository(ShortUrlEntity) private readonly userRepository: Repository<ShortUrlEntity>,
     private readonly loggerService: LoggerService,
+    private readonly hashGeneartor: HashGenerator,
   ) {}
 
   getHello(): string {
@@ -28,10 +30,10 @@ export class AppService {
     } else {
       const res = await this.userRepository.save({
         fullUrl: createUserUrl.fullUrl,
-        shortUrl: 'http://null', // here you need some service that can make URL shorter
-        clicked: 0,
+        shortUrl: this.hashGeneartor.generate(),
+        clicked: 0, // (for future) count how many times this URL was used
       });
-      this.loggerService.log(`[AppService] url "${createUserUrl.fullUrl}" saved`);
+      this.loggerService.log(`[AppService] new URL (${createUserUrl.fullUrl}) saved`);
     }
   }
 
