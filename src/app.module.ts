@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ShortUrlEntity } from './entities/short-url.entity';
+import { ShrinkEntity } from './entities/shrink.entity';
 import { LoggerService } from './logger/logger.service';
 import { HashGenerator } from './helpers/hash-generator';
 import { AppRepository } from './app.repository';
@@ -13,7 +13,7 @@ import { ShrinkerModule } from './shrinker/shrinker.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forFeature([ShortUrlEntity]),
+    TypeOrmModule.forFeature([ShrinkEntity]),
     DatabaseModule,
     ShrinkerModule,
   ],

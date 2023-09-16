@@ -6,10 +6,10 @@ import { LoggerService } from 'src/logger/logger.service';
 import { HashGenerator } from 'src/helpers/hash-generator';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseModule } from 'src/database/database.module';
-import { ShortUrlEntity } from 'src/entities/short-url.entity';
+import { ShrinkEntity } from 'src/entities/shrink.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ShortUrlEntity]), DatabaseModule],
+  imports: [TypeOrmModule.forFeature([ShrinkEntity]), DatabaseModule],
   providers: [ShrinkerService, LoggerService, ShrinkerRepository, HashGenerator],
   controllers: [ShrinkerController],
 })

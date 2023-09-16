@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { ShortUrlEntity } from '../entities/short-url.entity';
+import { ShrinkEntity } from '../entities/shrink.entity';
 import { UserUrlDto } from './dto/user-url.dto';
 import { LoggerService } from '../logger/logger.service';
 import { ShrinkerRepository } from './shrinker.repository';
-import { ShortUrlDto } from './dto/short-url.dto';
 
 @Injectable()
 export class ShrinkerService {
@@ -22,7 +21,7 @@ export class ShrinkerService {
     }
   }
 
-  async findFullUrl(shortUrlHash: string): Promise<ShortUrlEntity> {
+  async findFullUrl(shortUrlHash: string): Promise<ShrinkEntity> {
     const res = await this.shrinkerRepository.findShortUrl(shortUrlHash);
     return res;
   }

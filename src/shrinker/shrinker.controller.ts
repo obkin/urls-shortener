@@ -12,7 +12,6 @@ import {
 import { UserUrlDto } from './dto/user-url.dto';
 import { LoggerService } from '../logger/logger.service';
 import { ShrinkerService } from './shrinker.service';
-import { ShortUrlDto } from './dto/short-url.dto';
 
 @Controller('shrinker')
 export class ShrinkerController {

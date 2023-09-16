@@ -1,6 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ShrinkerService } from './shrinker.service';
 
+const ShrinkerRepositoryMock = {
+  create: jest.fn(),
+  findShortUrl: jest.fn(),
+  findFullUrl: jest.fn(),
+};
+
 describe('ShrinkerService', () => {
   let service: ShrinkerService;
 
@@ -12,7 +18,11 @@ describe('ShrinkerService', () => {
     service = module.get<ShrinkerService>(ShrinkerService);
   });
 
-  it('should be defined', () => {
+  it('createShortUrl', async () => {
+    expect(service).toBeDefined();
+  });
+
+  it('findFullUrl', async () => {
     expect(service).toBeDefined();
   });
 });

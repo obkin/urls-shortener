@@ -12,7 +12,7 @@ describe('ShrinkerController', () => {
     controller = module.get<ShrinkerController>(ShrinkerController);
   });
 
-  it('should be defined', () => {
+  it('should be defined', async () => {
     expect(controller).toBeDefined();
   });
 });
