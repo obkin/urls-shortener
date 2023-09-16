@@ -22,9 +22,9 @@ export class AppController {
 
   @Post()
   @UsePipes(new ValidationPipe())
-  createShortUrl(@Body() createUserUrl: UserUrlDto): void {
+  async createShortUrl(@Body() createUserUrl: UserUrlDto): Promise<void> {
     try {
-      this.appService.createShortUrl(createUserUrl);
+      await this.appService.createShortUrl(createUserUrl);
     } catch (e) {
       this.loggerService.error('[AppController] error: ', e.message);
     }
@@ -32,12 +32,12 @@ export class AppController {
 
   @Get(':hash')
   @Redirect()
-  getFullUrl(@Param('hash') hash: string): void {
+  async getFullUrl(@Param('hash') hash: string): Promise<void> {
     try {
-      this.appService.findFullUrl(hash);
+      const { fullUrl } = await this.appService.findFullUrl(hash);
+      console.log(fullUrl);
     } catch (e) {
       this.loggerService.error('[AppController] error: ', e.message);
     }
-    console.log(hash);
   }
 }

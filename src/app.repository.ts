@@ -1,11 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { LoggerService } from './logger/logger.service';
 import { ShortUrlEntity } from './entities/short-url.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserUrlDto } from './dto/user-url.dto';
 import { HashGenerator } from './helpers/hash-generator';
-import { ShortUrlDto } from './dto/short-url.dto';
 
 @Injectable()
 export class AppRepository {

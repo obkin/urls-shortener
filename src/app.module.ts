@@ -8,6 +8,7 @@ import { ShortUrlEntity } from './entities/short-url.entity';
 import { LoggerService } from './logger/logger.service';
 import { HashGenerator } from './helpers/hash-generator';
 import { AppRepository } from './app.repository';
+import { UrlService } from './url/url.service';
 
 @Module({
   imports: [
@@ -16,6 +17,6 @@ import { AppRepository } from './app.repository';
     DatabaseModule,
   ],
   controllers: [AppController],
-  providers: [AppService, AppRepository, LoggerService, HashGenerator],
+  providers: [AppService, AppRepository, LoggerService, HashGenerator, UrlService],
 })
 export class AppModule {}

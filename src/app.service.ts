@@ -27,7 +27,8 @@ export class AppService {
     }
   }
 
-  async findFullUrl(shortUrlHash: string): Promise<any> {
+  async findFullUrl(shortUrlHash: string): Promise<ShortUrlEntity> {
     const res = await this.appRepository.findShortUrl(shortUrlHash);
+    return res;
   }
 }
