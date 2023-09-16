@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ShortUrlEntity } from '../entities/short-url.entity';
-import { UserUrlDto } from '../dto/user-url.dto';
+import { UserUrlDto } from './dto/user-url.dto';
 import { LoggerService } from '../logger/logger.service';
 import { ShrinkerRepository } from './shrinker.repository';
-import { ShortUrlDto } from '../dto/short-url.dto';
+import { ShortUrlDto } from './dto/short-url.dto';
 
 @Injectable()
 export class ShrinkerService {

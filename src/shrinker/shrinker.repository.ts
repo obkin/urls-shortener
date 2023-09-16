@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ShortUrlEntity } from '../entities/short-url.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserUrlDto } from '../dto/user-url.dto';
+import { UserUrlDto } from './dto/user-url.dto';
 import { HashGenerator } from '../helpers/hash-generator';
 
 @Injectable()
