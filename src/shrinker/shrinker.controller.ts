@@ -2,9 +2,10 @@ import {
   Body,
   Controller,
   Get,
+  HttpStatus,
   Param,
   Post,
-  Redirect,
+  Res,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -31,11 +32,11 @@ export class ShrinkerController {
   }
 
   @Get(':hash')
-  @Redirect()
-  async getFullUrl(@Param('hash') hash: string): Promise<void> {
+  async getFullUrl(@Param('hash') hash: string, @Res() res): Promise<void> {
     try {
       const { fullUrl } = await this.shrinkerService.findFullUrl(hash);
-      console.log(fullUrl);
+      console.log(fullUrl); // console.log
+      return res.redirect(HttpStatus.MOVED_PERMANENTLY, fullUrl);
     } catch (e) {
       this.loggerService.error('[AppController] error: ', e.message);
     }
