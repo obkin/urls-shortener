@@ -1,7 +1,17 @@
-import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Redirect,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AppService } from './app.service';
-import { UserUrlDto } from './entities/user-url.dto';
+import { UserUrlDto } from './dto/user-url.dto';
 import { LoggerService } from './logger/logger.service';
+import { ShortUrlDto } from './dto/short-url.dto';
 
 @Controller()
 export class AppController {
@@ -10,18 +20,24 @@ export class AppController {
     private readonly loggerService: LoggerService,
   ) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
   @Post()
   @UsePipes(new ValidationPipe())
-  getFullUrl(@Body() createUserUrl: UserUrlDto): void {
+  createShortUrl(@Body() createUserUrl: UserUrlDto): void {
     try {
       this.appService.createShortUrl(createUserUrl);
     } catch (e) {
-      console.log('[AppService] - error: ', e.message);
+      this.loggerService.error('[AppController] error: ', e.message);
     }
+  }
+
+  @Get(':hash')
+  @Redirect()
+  getFullUrl(@Param('hash') hash: string): void {
+    try {
+      this.appService.findFullUrl(hash);
+    } catch (e) {
+      this.loggerService.error('[AppController] error: ', e.message);
+    }
+    console.log(hash);
   }
 }

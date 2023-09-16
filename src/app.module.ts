@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ShortUrlEntity } from './entities/short-url.entity';
 import { LoggerService } from './logger/logger.service';
 import { HashGenerator } from './helpers/hash-generator';
+import { AppRepository } from './app.repository';
 
 @Module({
   imports: [
@@ -15,6 +16,6 @@ import { HashGenerator } from './helpers/hash-generator';
     DatabaseModule,
   ],
   controllers: [AppController],
-  providers: [AppService, LoggerService, HashGenerator],
+  providers: [AppService, AppRepository, LoggerService, HashGenerator],
 })
 export class AppModule {}
