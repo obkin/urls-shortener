@@ -10,7 +10,6 @@ const testDto: UserUrlDto = {
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
-  // let createdId: string;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -21,15 +20,7 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  // describe('ShrinkerController (e2e)', () => {
-  //   // it('/shrinker', async()=>{});
-  // });
-
   it('/shrinker (POST)', () => {
     return request(app.getHttpServer()).post('/shrinker').send(testDto).expect(201);
-    // .then(({ body }: request.Response) => {
-    //   createdId = body._id;
-    //   expect(createdId).toBeDefined();
-    // });
   });
 });
