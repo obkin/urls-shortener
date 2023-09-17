@@ -24,7 +24,7 @@ export class ShrinkerController {
   @UsePipes(new ValidationPipe())
   async createShortUrl(@Body() createUserUrl: UserUrlDto): Promise<void> {
     try {
-      await this.shrinkerService.createShortUrl(createUserUrl);
+      await this.shrinkerService.createShrinker(createUserUrl);
     } catch (e) {
       this.loggerService.error('[AppController] error: ', e.message);
     }

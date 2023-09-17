@@ -11,7 +11,7 @@ export class ShrinkerService {
     private readonly shrinkerRepository: ShrinkerRepository,
   ) {}
 
-  async createShortUrl(createUserUrl: UserUrlDto): Promise<void> {
+  async createShrinker(createUserUrl: UserUrlDto): Promise<void> {
     const res = await this.shrinkerRepository.findFullUrl(createUserUrl.fullUrl);
     if (!res) {
       this.shrinkerRepository.create(createUserUrl);

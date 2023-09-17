@@ -1,18 +1,26 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ShrinkerController } from './shrinker.controller';
+import { ShrinkerService } from './shrinker.service';
 
 describe('ShrinkerController', () => {
-  let controller: ShrinkerController;
+  let shrinkerController: ShrinkerController;
+  let shrinkerService: ShrinkerService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ShrinkerController],
+      providers: [ShrinkerService],
     }).compile();
 
-    controller = module.get<ShrinkerController>(ShrinkerController);
+    shrinkerController = module.get<ShrinkerController>(ShrinkerController);
+    shrinkerService = module.get<ShrinkerService>(ShrinkerService);
   });
 
-  it('should be defined', async () => {
-    expect(controller).toBeDefined();
+  describe('createShortUrl', () => {
+    it('should create a Shrinker Entity', async () => {
+      const userUrl = 'https://youtube.com';
+      jest.spyOn(ShrinkerService, '')
+      expect(await ShrinkerController)
+    });
   });
 });
