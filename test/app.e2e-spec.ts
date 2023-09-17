@@ -8,6 +8,8 @@ const testDto: UserUrlDto = {
   fullUrl: 'https://youtube.com',
 };
 
+const userHash = 'fm0bk';
+
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
@@ -20,7 +22,12 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/shrinker (POST)', () => {
-    return request(app.getHttpServer()).post('/shrinker').send(testDto).expect(201);
+  describe('ShrinkerController (e2e)', () => {
+    it('/shrinker (POST)', () => {
+      return request(app.getHttpServer()).post('/shrinker').send(testDto).expect(201);
+    });
+    it('/shrinker (GET)', () => {
+      return request(app.getHttpServer()).get(`/shrinker/${userHash}`).expect(301);
+    });
   });
 });
