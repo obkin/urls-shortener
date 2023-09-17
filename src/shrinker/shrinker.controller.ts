@@ -34,7 +34,6 @@ export class ShrinkerController {
   async getFullUrl(@Param('hash') hash: string, @Res() res): Promise<void> {
     try {
       const { fullUrl } = await this.shrinkerService.findFullUrl(hash);
-      console.log(fullUrl); // console.log
       return res.redirect(HttpStatus.MOVED_PERMANENTLY, fullUrl);
     } catch (e) {
       this.loggerService.error('[AppController] error: ', e.message);
