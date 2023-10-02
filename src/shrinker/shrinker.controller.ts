@@ -12,6 +12,7 @@ import {
 import { UserUrlDto } from './dto/user-url.dto';
 import { LoggerService } from '../logger/logger.service';
 import { ShrinkerService } from './shrinker.service';
+import { ShrinkEntity } from 'src/entities/shrink.entity';
 
 @Controller('shrinker')
 export class ShrinkerController {
@@ -22,10 +23,12 @@ export class ShrinkerController {
 
   @Post()
   @UsePipes(new ValidationPipe())
-  async createShortUrl(@Body() createUserUrl: UserUrlDto): Promise<void> {
+  async createShortUrl(@Body() createUserUrl: UserUrlDto): Promise<string> {
     try {
-      await this.shrinkerService.createShrinker(createUserUrl);
+      const res = await this.shrinkerService.createShrinker(createUserUrl);
+      return `http://localhost:3000/shrinker/${res.shortUrl}`;
     } catch (e) {
+      // return short url to user if it exists
       this.loggerService.error('[AppController] error: ', e.message);
     }
   }

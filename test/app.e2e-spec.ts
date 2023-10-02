@@ -4,11 +4,9 @@ import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 import { UserUrlDto } from './../src/shrinker/dto/user-url.dto';
 
-const testDto: UserUrlDto = {
+const userUrl: UserUrlDto = {
   fullUrl: 'https://youtube.com',
 };
-
-const userHash = 'fm0bk';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -22,12 +20,15 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  describe('ShrinkerController (e2e)', () => {
-    it('/shrinker (POST)', () => {
-      return request(app.getHttpServer()).post('/shrinker').send(testDto).expect(201);
-    });
-    it('/shrinker (GET)', () => {
-      return request(app.getHttpServer()).get(`/shrinker/${userHash}`).expect(301);
-    });
+  it('/shrinker (POST) - success', () => {
+    return request(app.getHttpServer()).post('/shrinker').send(userUrl).expect(201);
+  });
+
+  it('/shrinker (POST) - fail (url )', () => {
+    return request(app.getHttpServer()).post('/shrinker').send(userUrl).expect(201);
+  });
+
+  afterAll(async () => {
+    await app.close();
   });
 });

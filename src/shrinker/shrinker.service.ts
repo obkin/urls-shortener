@@ -11,13 +11,14 @@ export class ShrinkerService {
     private readonly shrinkerRepository: ShrinkerRepository,
   ) {}
 
-  async createShrinker(createUserUrl: UserUrlDto): Promise<void> {
+  async createShrinker(createUserUrl: UserUrlDto): Promise<ShrinkEntity> {
     const res = await this.shrinkerRepository.findFullUrl(createUserUrl.fullUrl);
     if (!res) {
-      this.shrinkerRepository.create(createUserUrl);
       this.loggerService.log(`[AppService] new URL (${createUserUrl.fullUrl}) saved`);
+      return this.shrinkerRepository.create(createUserUrl);
     } else {
-      this.loggerService.error(`[AppService] such URL (${createUserUrl.fullUrl}) is already exist`);
+      this.loggerService.warn(`[AppService] such URL (${createUserUrl.fullUrl}) is already exist`);
+      return res;
     }
   }
 
