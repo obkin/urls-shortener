@@ -1,6 +1,6 @@
-FROM node:16.18.1-bullseye-slim
+FROM node:16.18.1
 
-COPY . .
+COPY . /app
 WORKDIR /app
 
 RUN ["npm", "install"]
