@@ -28,7 +28,6 @@ export class ShrinkerController {
       const res = await this.shrinkerService.createShrinker(createUserUrl);
       return `http://localhost:3000/shrinker/${res.shortUrl}`;
     } catch (e) {
-      // return short url to user if it exists
       this.loggerService.error('[AppController] error: ', e.message);
     }
   }
