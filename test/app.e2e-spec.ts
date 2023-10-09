@@ -32,16 +32,13 @@ describe('AppController (e2e)', () => {
       });
   });
 
-  it('/shrinker/:hash (GET) - success (redirect to correct url)', () => {
-    return request(app.getHttpServer()).get(`/shrinker/:${urlHash}`).expect(301);
+  it('/shrinker/hash (GET) - success (redirect to correct url)', () => {
+    return request(app.getHttpServer()).get(`/shrinker/${urlHash}`).expect(301);
   });
 
-  // it('/shrinker/:hash (GET) - fail (redirect to 404)', () => {
-  //   return request(app.getHttpServer())
-  //     .get(`/shrinker/:${urlHash}`)
-  //     .expect(301)
-  //     .expect('https://en.wikipedia.org/wiki/HTTP_404');
-  // });
+  it('/shrinker/hash (GET) - fail (redirect to 404)', () => {
+    return request(app.getHttpServer()).get(`/shrinker/notExistsUrl`).expect(404);
+  });
 
   afterEach(async () => {
     await app.close();

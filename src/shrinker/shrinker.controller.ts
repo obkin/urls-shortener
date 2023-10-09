@@ -38,7 +38,7 @@ export class ShrinkerController {
       if (result) {
         return res.redirect(HttpStatus.MOVED_PERMANENTLY, result.fullUrl);
       } else {
-        return res.redirect(HttpStatus.MOVED_PERMANENTLY, 'https://en.wikipedia.org/wiki/HTTP_404'); // here sould be 404 page
+        return res.redirect(HttpStatus.NOT_FOUND, 'https://en.wikipedia.org/wiki/HTTP_404'); // here sould be 404 page
       }
     } catch (e) {
       this.loggerService.error('[AppController] error: ', e.message);
