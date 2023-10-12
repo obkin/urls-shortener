@@ -2,14 +2,21 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ShrinkerController } from './shrinker.controller';
 import { ShrinkerService } from './shrinker.service';
 import { LoggerService } from '../logger/logger.service';
+import { UserUrlDto } from './dto/user-url.dto';
 
-// IS NOT WORKING NEED TO BE FIXED
-// IS NOT WORKING NEED TO BE FIXED
-// IS NOT WORKING NEED TO BE FIXED
+const userUrl: UserUrlDto = {
+  fullUrl: 'https://github.com/obkin',
+};
+
+const shrinkerServiceMockReturn = {
+  fullUrl: 'https://github.com/obkin',
+  shortUrl: 'zw1ous',
+  clicked: 0,
+  id: 1,
+};
 
 describe('ShrinkerController', () => {
   let shrinkerController: ShrinkerController;
-  let shrinkerService: ShrinkerService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -26,17 +33,20 @@ describe('ShrinkerController', () => {
         {
           provide: ShrinkerService,
           useValue: {
-            getData: jest.fn().mockResolvedValueOnce([1]),
+            createShrinker: jest.fn().mockReturnValueOnce(shrinkerServiceMockReturn),
+            findFullUrl: jest.fn().mockReturnValueOnce(shrinkerServiceMockReturn),
           },
         },
       ],
     }).compile();
 
     shrinkerController = module.get<ShrinkerController>(ShrinkerController);
-    shrinkerService = module.get<ShrinkerService>(ShrinkerService);
   });
 
-  describe('createShortUrl', () => {
-    it('should create a Shrinker Entity', async () => {});
+  describe('createShortUrl - success', () => {
+    it('should create a Shrinker Entity', async () => {
+      const res = await shrinkerController.createShortUrl(userUrl);
+      expect(res).toBeDefined();
+    });
   });
 });
